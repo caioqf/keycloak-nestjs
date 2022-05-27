@@ -9,7 +9,7 @@
 
     <v-main>
       <v-card width="500" class="mx-auto mt-9">
-        <v-card-title class="justify-center">Área Privada!</v-card-title>
+        <h1 class="justify-center">Área Privada!</h1>
         <v-img
           max-height="300"
           max-width="300"
@@ -17,10 +17,18 @@
           alt="Vue logo"
           src="../src/assets/logo.png"
         />
+        <p class="text-center">
+          Bem-vindo! Esta é uma página protegida pelo login do <b>Keycloak</b>.
+          Apénas os usuários devidamente <b>cadastrados</b> e
+          <b>autenticados</b> pelo keycloak podem ver este conteúdo.
+        </p>
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn class="mx-auto mt-9" @click="submitLogout()" color="success"
             >Logout</v-btn
+          >
+          <v-btn class="mx-auto mt-9" @click="sendAuthRequest()" color="info"
+            >API Request</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -32,6 +40,7 @@
 export default {
   name: "home-page",
   props: ["keycloak"],
+
   mounted() {
     console.log(this.keycloak);
   },
@@ -48,4 +57,44 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+#nav {
+  padding: 30px;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+button {
+  margin-top: 30px;
+  color: #42b983;
+  font-size: 1.2rem;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>

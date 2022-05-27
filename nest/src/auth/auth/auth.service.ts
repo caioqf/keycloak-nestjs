@@ -19,10 +19,3 @@ export class AuthService {
     return data;
   }
 }
-
-
-// client_id=nest
-// &client_secret=e7767e67-649b-46b1-8abd-294d7cccb2a4
-// &grant_type=password
-// &username=user1@user.com
-// &password=123456

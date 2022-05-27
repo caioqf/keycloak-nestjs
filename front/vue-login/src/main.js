@@ -6,7 +6,7 @@ import Keycloak from 'keycloak-js'
 Vue.config.productionTip = false
 
 let initConfig = {
-  url: 'http://localhost:8080/auth',
+  url: 'http://host.docker.internal:8080/auth',
   clientId: 'vue',
   realm: 'aronline',
   onLoad: 'login-required',
