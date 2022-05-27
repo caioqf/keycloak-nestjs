@@ -60,11 +60,9 @@ export default {
           password: this.passwordForm,
         })
         .then((response) => {
-          console.log(response);
           this.info = {
             "Access-Token": response.data.access_token,
-            "Refresh-Token": response.data.refresh_token,
-            "Expires In": response.data.expires_in,
+            "ID Token": response.data.id_token,
           };
         })
         .catch((error) => {
