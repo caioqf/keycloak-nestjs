@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "home-page",
   props: ["keycloak"],
@@ -53,6 +55,17 @@ export default {
         console.log("Deslogado", success);
       });
       localStorage.clear();
+    },
+    sendAuthRequest() {
+      axios
+        .get("http://localhost:3000/test-auth", {
+          headers: {
+            Authorization: `Bearer ${this.keycloak?.token}`,
+          },
+        })
+        .then((response) => {
+          alert(response.data.name);
+        });
     },
   },
 };
