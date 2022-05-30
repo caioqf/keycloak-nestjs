@@ -11,9 +11,9 @@ O próximo passo é configurar o Keycloak, definindo os realms, clients e usuari
 - Acesse _https://localhost:8080_
 - Logue no painel com usuario **admin** e senha **admin**
 
-Na barra lateral, na aba **manage**, clique em "Import" e selecione o arquivo _"realm-export.json"_ encontrado no projeto.
+Em _Users_, vá em _Add user_ e crie um usuario com email e username.
 
-Em "If a resource exists" selecione "skip" e pressione **Import**.
+No seu usário, vá na aba credentials e defina uma senha para o mesmo.
 
 ### Fluxo
 
@@ -21,7 +21,8 @@ Em "If a resource exists" selecione "skip" e pressione **Import**.
 
 **Acesse com:**
 
-> **username**: user1@user.com > **senha**: 123456
+> **username**: {SEU_USERNAME_CRIADO}
+> **senha**: {SUA_SENHA_CRIADA}
 
 **ou**
 
