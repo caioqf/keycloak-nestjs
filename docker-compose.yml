@@ -14,9 +14,9 @@ services:
       - 3000:3000
     extra_hosts:
       - host.docker.internal:172.17.0.1
-    # depends_on:
-    #   - keycloak
-    #   - front
+    depends_on:
+      - keycloak
+      - front
 
   front:
     container_name: FrontEnd_Vue
@@ -31,6 +31,7 @@ services:
       - 'npm run serve'
 
   keycloak:
+    hostname: keycloak  
     container_name: Keycloak_Build
     image: jboss/keycloak:15.0.0
     volumes: 

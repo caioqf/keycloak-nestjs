@@ -24,10 +24,11 @@ No seu usário, vá na aba credentials e defina uma senha para o mesmo.
 > **username**: {SEU_USERNAME_CRIADO}
 > **senha**: {SUA_SENHA_CRIADA}
 
-**ou**
+#### Alterar o client_secret
 
-> Cadastre um novo usuário no Dashboard do Keycloak
+- Em **_Clients_** vá na aba **_Credentials_**
+  Clique em Regenerate Secret e copie o novo gerado.
 
-**ou**
+- Agora no projeto, na pasta nest, abra o .env e altere o **KK_CLIENT_SECRET** e a propriedade **secret** em **KEYCLOAK_JSON** para a string gerada anteriormente
 
-> Um dos metodos de **_OAuth 2.0_** disponíveis.
+- Reinicie o container rodando o app Nest.
