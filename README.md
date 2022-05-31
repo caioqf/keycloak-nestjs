@@ -28,7 +28,7 @@ ou
 
 Você pode criar um **novo** usuário a partir do painel de admin
 
-> - Acesse _https://localhost:8080_
+> - Acesse _http://localhost:8080_
 > - Logue no painel com usuario **admin** e senha **admin**
 >
 > - Em _Users_, vá em _Add user_ e crie um usuario com email e username.
@@ -36,8 +36,8 @@ Você pode criar um **novo** usuário a partir do painel de admin
 
 ### Uso
 
-Agora acessando o [Front-end](http://localhost:8082) é possivel testar a POC.
+Agora acessando o [Front-end](http://localhost:8082) (htttp://localhost:8082) é possivel testar a POC.
 
 Você será direcionado para a pagina de login do keycloak, nela, submetendo os dados corretamente, será automaticamente redirecionado para a parte autenticada da aplicação. Agora autenticado com os cookies recebidos do Keycloak, pode fazer livremente requisições à API, contato que tenha permissão necessária para a determinada rota.
 
-Note que; se utilizar o token recebido no console, é possível fazer requisições de fora da aplicação front-end (i.e.: Insomnia, Postman), desde que a sessão não seja encerrada clicando no botão _Logout_
+Note que; se utilizar o token recebido no console, é possível fazer requisições de fora da aplicação front-end (i.e.: Insomnia, Postman), desde que a sessão não seja encerrada clicando no botão _Logout_.
