@@ -10,14 +10,14 @@ services:
       - .:/home/node/app
     extra_hosts:
       - host.docker.internal:172.17.0.1
-    depends_on:
-      - db
-  db:
-    build: ./.docker/mysql
-    restart: always
-    tty: true
-    volumes: 
-      - ./.docker/mysql?;var/lib/mysql
-    environment:
-      - MYSQL_DATABASE=fin
-      - MYSQL_ROOT_PASSWORD=root
+    # depends_on:
+    #   - db
+  # db:
+  #   build: ./.docker/mysql
+  #   restart: always
+  #   tty: true
+  #   volumes: 
+  #     - ./.docker/mysql?;var/lib/mysql
+  #   environment:
+  #     - MYSQL_DATABASE=fin
+  #     - MYSQL_ROOT_PASSWORD=root

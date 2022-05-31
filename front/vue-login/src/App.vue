@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app dark color="blue">
+    <v-app-bar app dark color="green">
       <v-toolbar-title>Ar-Online</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn text rounded>Home</v-btn>
@@ -9,33 +9,28 @@
 
     <v-main>
       <v-card width="500" class="mx-auto mt-9">
-        <v-card-title>Área de Login</v-card-title>
-        <v-card-text>
-          <v-text-field
-            v-model="usernameForm"
-            id="username"
-            label="Usuário"
-            prepend-icon="mdi-account-circle"
-          ></v-text-field>
-          <v-text-field
-            v-model="passwordForm"
-            id="password"
-            label="Senha"
-            :type="showPassword ? 'text' : 'password'"
-            prepend-icon="mdi-lock"
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="showPassword = !showPassword"
-          />
-        </v-card-text>
+        <h1 class="justify-center">Área Privada!</h1>
+        <v-img
+          max-height="300"
+          max-width="300"
+          class="mx-auto"
+          alt="Vue logo"
+          src="../src/assets/logo.png"
+        />
+        <p class="text-center">
+          Bem-vindo! Esta é uma página protegida pelo login do <b>Keycloak</b>.
+          Apénas os usuários devidamente <b>cadastrados</b> e
+          <b>autenticados</b> pelo keycloak podem ver este conteúdo.
+        </p>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn @click="submitLogin()" color="success">Logar</v-btn>
-          <v-btn color="info">Registrar</v-btn>
+          <v-btn class="mx-auto mt-9" @click="submitLogout()" color="success"
+            >Logout</v-btn
+          >
+          <v-btn class="mx-auto mt-9" @click="sendAuthRequest()" color="info"
+            >API Request</v-btn
+          >
         </v-card-actions>
-      </v-card>
-      <v-divider></v-divider>
-      <v-card>
-        <p>{{ info }}</p>
       </v-card>
     </v-main>
   </v-app>
@@ -43,36 +38,76 @@
 
 <script>
 import axios from "axios";
+
 export default {
-  data() {
-    return {
-      showPassword: false,
-      info: null,
-      usernameForm: "",
-      passwordForm: "",
-    };
+  name: "home-page",
+  props: ["keycloak"],
+
+  mounted() {
+    console.log(this.keycloak);
   },
   methods: {
-    submitLogin() {
+    submitLogout() {
+      const logoutOptions = {
+        redirectUri: "http://localhost:8082",
+      };
+      this.keycloak.logout(logoutOptions).then((success) => {
+        console.log("Deslogado", success);
+      });
+      localStorage.clear();
+    },
+    sendAuthRequest() {
       axios
-        .post("http://localhost:3000/login", {
-          username: this.usernameForm,
-          password: this.passwordForm,
+        .get("http://localhost:3000/test-auth", {
+          headers: {
+            Authorization: `Bearer ${this.keycloak?.token}`,
+          },
         })
         .then((response) => {
-          console.log(response);
-          this.info = {
-            "Access-Token": response.data.access_token,
-            "Refresh-Token": response.data.refresh_token,
-            "Expires In": response.data.expires_in,
-          };
-        })
-        .catch((error) => {
-          alert(error);
+          alert(response.data.name);
         });
     },
   },
 };
 </script>
+<style lang="scss" scoped>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+#nav {
+  padding: 30px;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+button {
+  margin-top: 30px;
+  color: #42b983;
+  font-size: 1.2rem;
+  padding: 8px;
+  border-radius: 6px;
+}
 
-<style lang="scss" scoped></style>
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>

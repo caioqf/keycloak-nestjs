@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  app:
+    container_name: BackEnd_Nestjs
+    build: 
+      context: ./nest/
+      dockerfile: Dockerfile
+    entrypoint: 
+      - 'sh'
+      - '-c'
+      - 'npm run start:dev'
+    ports:
+      - 3000:3000
+    extra_hosts:
+      - host.docker.internal:172.17.0.1
+    depends_on:
+      - keycloak
+      - front
+
+  front:
+    container_name: FrontEnd_Vue
+    build:
+      context: ./front/vue-login/
+      dockerfile: Dockerfile
+    ports: 
+      - 8082:8082
+    entrypoint:
+      - 'sh'
+      - '-c'
+      - 'npm run serve'
+
+  keycloak:
+    hostname: keycloak  
+    container_name: Keycloak_Build
+    image: jboss/keycloak:15.0.0
+    volumes: 
+      - ./imports:/opt/jboss/keycloak/imports
+      - ./keycloak_data:/opt/jboss/keycloak/standalone/data
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/realm-export.json
+      - DB_VENDOR=h2
+    ports:
+      - 8080:8080
+    command: -Dkeycloak.profile.feature.upload_scripts=enabled
